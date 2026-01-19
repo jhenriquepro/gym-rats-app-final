@@ -1,0 +1,287 @@
+/* --- BOTÕES --- */
+button {
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-main);
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    text-transform: uppercase;
+}
+
+.btn-success {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--color-success);
+    color: white;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.btn-text {
+    width: 100%;
+    background: none;
+    color: var(--color-danger);
+    font-size: 0.9rem;
+    padding: 12px;
+}
+
+.btn-icon-action {
+    /* Botões redondos (Lápis/Lixo) */
+    background: transparent !important;
+    /* CORREÇÃO FUNDO BRANCO */
+    border: none !important;
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-edit {
+    color: var(--color-primary);
+}
+
+.btn-delete {
+    color: var(--color-danger);
+}
+
+/* --- INPUTS --- */
+.form-group {
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--color-bg-input);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 10px;
+    /* Remove setas padrão */
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--color-primary);
+}
+
+/* Seta customizada para Selects */
+select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+/* --- MODAIS (Genérico e Login) --- */
+.modal {
+    border: none;
+    background: transparent;
+    margin: auto;
+    padding: 0;
+    width: 90%;
+    max-width: 400px;
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--color-bg-surface);
+    padding: 25px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    text-align: center;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal h3 {
+    color: white !important;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+/* Estilos específicos de Login */
+.login-content p {
+    color: var(--color-text-muted);
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.btn-google {
+    background: white !important;
+    color: black !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: var(--radius-pill);
+    font-weight: bold;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    color: #666;
+    margin: 15px 0;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #333;
+    margin: 0 10px;
+}
+
+/* --- COMPONENTE: LISTA DE TREINOS (Template Item) --- */
+/* Correção do texto vazando e alinhamento */
+.template-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: 10px;
+    overflow: hidden;
+    /* Garante bordas arredondadas */
+}
+
+.template-info-btn {
+    flex: 1;
+    min-width: 0;
+    /* Permite encolher texto longo */
+    background: transparent !important;
+    /* CORREÇÃO FUNDO BRANCO */
+    border: none !important;
+    color: white !important;
+    text-align: left;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+
+    /* Quebra de texto */
+    white-space: normal !important;
+    word-break: break-word;
+}
+
+.template-actions {
+    display: flex;
+    gap: 5px;
+    padding-right: 10px;
+    flex-shrink: 0;
+    /* Ícones nunca encolhem */
+}
+
+/* --- COMPONENTE: CALENDÁRIO --- */
+.calendar-wrapper {
+    width: 100%;
+}
+
+.calendar-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.inp-cal-select {
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23CCFF00%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    padding-right: 30px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    background: var(--color-bg-input);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.day-active {
+    background-color: rgba(204, 255, 0, 0.2) !important;
+    border: 1px solid var(--color-primary) !important;
+    color: white !important;
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(204, 255, 0, 0.2);
+}
+
+.day-today {
+    border: 1px dashed white;
+}
+
+.calendar-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.dot-legend {
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}

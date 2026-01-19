@@ -1,0 +1,73 @@
+:root {
+    /* Paleta de Cores: Dark Mode Premium */
+    --color-bg-main: #0a0a0a;
+    --color-bg-surface: #1c1c1e;
+    --color-bg-input: #2c2c2e;
+
+    /* Acentuação (Neon Lime) */
+    --color-primary: #FF6500;
+    --color-primary-hover: #D56A23;
+    --color-on-primary: #000000;
+
+    /* Cores de Estado */
+    --color-text-main: #ffffff;
+    --color-text-muted: #8e8e93;
+    --color-success: #FF6600;
+    --color-danger: #f30d01;
+    --color-border: #3a3a3c;
+
+    /* Layout & Spacing */
+    --header-height: 60px;
+    --nav-height: 70px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-pill: 100px;
+
+    /* Effects */
+    --shadow-glow: 0 0 15px rgba(204, 255, 0, 0.15);
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    /* Remove flash azul no mobile */
+}
+
+body {
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+
+    /* Espaçamento para não ficar atrás dos menus fixos */
+    padding-top: calc(var(--header-height) + 10px);
+    padding-bottom: calc(var(--nav-height) + 20px);
+
+    overflow-x: hidden;
+    /* Evita rolagem lateral */
+}
+
+/* Utilitários */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--color-text-muted);
+}
+
+.full-width {
+    width: 100%;
+}

@@ -1,0 +1,17 @@
+/* 1. BASE: Configurações globais, variáveis e Resets */
+@import url('./base/base.css');
+
+/* 2. LAYOUT: Estrutura macro (Header, Nav, Container) */
+@import url('./layout/layout.css');
+
+/* 3. COMPONENTS: Elementos reutilizáveis (Botões, Modais, Inputs, Cards) */
+@import url('./components/components.css');
+
+/* 4. PAGES: Estilos específicos de cada tela */
+@import url('./pages/pages.css');
+
+/* --- CORREÇÃO GLOBAL DE ROLAGEM --- */
+html {
+    /* Impede rolagem suave para que o JS controle a posição exata */
+    scroll-behavior: auto !important;
+}

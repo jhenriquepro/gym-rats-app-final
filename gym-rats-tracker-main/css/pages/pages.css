@@ -1,0 +1,357 @@
+/* css/pages.css */
+
+/* --- PADRÃO DE TELAS (View) --- */
+.view-section {
+    min-height: 100vh;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.view-header {
+    background-color: var(--color-bg-main);
+    padding: 20px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    margin-bottom: 20px;
+    height: 70px;
+    /* Altura fixa para garantir estabilidade */
+}
+
+.view-header h2 {
+    color: white;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    /* Garante centralização */
+}
+
+#btn-back-records {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--color-primary);
+    font-size: 2rem;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Timer no Header (CORRIGIDO: Posicionamento Absoluto) */
+.timer-display {
+    position: absolute;
+    /* Fixa na direita */
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    font-family: monospace;
+    font-size: 1.2rem;
+    /* Levemente menor para caber melhor */
+    color: var(--color-primary);
+    background: rgba(204, 255, 0, 0.1);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(204, 255, 0, 0.2);
+    white-space: nowrap;
+}
+
+/* --- LOG WORKOUT (Execução) --- */
+.exercise-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 15px;
+    margin-bottom: 15px;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.exercise-header {
+    text-align: center;
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Cabeçalho das Colunas (KG REPS RPE) */
+.sets-header {
+    display: flex;
+    gap: 8px;
+    /* O mesmo gap dos inputs */
+    margin-bottom: 5px;
+    padding: 0 2px;
+}
+
+.sets-header span {
+    flex: 1;
+    /* Ocupa espaços iguais */
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Linha de Inputs */
+.set-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.inp-set {
+    flex: 1;
+    /* Ocupa espaços iguais */
+    text-align: center;
+    padding: 12px 2px;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+/* Estilo do Select RPE */
+.inp-rpe {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--color-bg-main);
+    color: white;
+    text-align: center;
+    text-align-last: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.inp-rpe option {
+    background-color: #222;
+    padding: 10px;
+}
+
+/* Timer de Descanso */
+.rest-timer-box {
+    width: 100%;
+    /* Ocupa largura total agora */
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.rest-timer-box.running {
+    border-color: var(--color-primary);
+    background: rgba(204, 255, 0, 0.05);
+}
+
+.rest-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.inp-timer {
+    width: 45px;
+    text-align: center;
+    padding: 8px;
+    margin: 0;
+    background: var(--color-bg-input);
+    border: 1px solid var(--color-border);
+    color: white;
+    border-radius: 4px;
+}
+
+.timer-countdown-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    font-family: monospace;
+    min-width: 60px;
+    text-align: center;
+}
+
+.btn-timer-toggle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid #666;
+    background: #222;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2px;
+    font-size: 0.9rem;
+}
+
+.rest-timer-box.running .btn-timer-toggle {
+    background: var(--color-danger);
+    border-color: var(--color-danger);
+    padding-left: 0;
+}
+
+/* --- DASHBOARD & OUTROS --- */
+.dashboard-calendar-area {
+    background: var(--color-bg-surface);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    margin-bottom: 25px;
+    border: 1px solid var(--color-border);
+}
+
+.action-area {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Create Workout */
+.add-exercise-box {
+    background: var(--color-bg-surface);
+    padding: 15px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    margin: 10px 0 20px 0;
+}
+
+.add-exercise-box label {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.add-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: stretch;
+}
+
+.add-row input,
+.add-row button {
+    height: 50px !important;
+    padding: 0 10px !important;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-row input {
+    width: 80px;
+    text-align: center;
+}
+
+#preview-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+#preview-list li {
+    background: var(--color-bg-input);
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--color-primary);
+    color: white;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#preview-list li span {
+    display: block;
+    max-width: 85%;
+}
+
+/* Registros */
+.records-container {
+    padding: 10px 20px 40px;
+}
+
+.filters-box {
+    background: var(--color-bg-surface);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    margin-bottom: 20px;
+}
+
+.filters-box label {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.date-inputs-row {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.inp-date {
+    flex: 1;
+    width: 0;
+    min-width: 0;
+    color-scheme: dark;
+    padding: 10px !important;
+    font-size: 0.85rem !important;
+    text-align: center;
+    height: 45px;
+    background-color: var(--color-bg-input);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: white;
+}
+
+.inp-date:focus {
+    border-color: var(--color-primary);
+}
+
+.record-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 15px;
+    margin-bottom: 15px;
+}
