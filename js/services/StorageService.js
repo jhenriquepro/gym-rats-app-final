@@ -1,63 +1,68 @@
 // js/services/StorageService.js
-import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-// Inicializa Firestore (sem precisar importar 'app' se já foi iniciado no AuthService, 
-// mas para garantir, pegamos a instância global ou recriamos simples)
-const db = getFirestore();
-const auth = getAuth();
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 export class StorageService {
     static userId = null;
+    static dbInstance = null; // Guarda a conexão para não recriar sempre
 
     static setUserId(uid) {
         this.userId = uid;
-        // Se logou, tenta sincronizar ou carregar dados da nuvem
-        if (uid) {
-            console.log("Usuário conectado no Storage:", uid);
-        }
+        if (uid) console.log("Storage conectado ao usuário:", uid);
     }
 
-    // Método Genérico para Salvar (Local ou Nuvem)
+    // [CORREÇÃO] Inicializa o Banco apenas quando necessário (Lazy Load)
+    // Isso evita o erro "No Firebase App" ao iniciar o site
+    static getDb() {
+        if (!this.dbInstance) {
+            try {
+                this.dbInstance = getFirestore();
+            } catch (e) {
+                console.error("Erro ao conectar no Firestore:", e);
+                return null;
+            }
+        }
+        return this.dbInstance;
+    }
+
+    // --- Salvar (Tenta Nuvem, mas garante Local) ---
     static async save(key, data) {
-        // 1. Sempre salva localmente para garantir rapidez e funcionamento offline
+        // 1. Salva Local (Garantia de Velocidade/Offline)
         try {
             const localKey = this.userId ? `user_${this.userId}_${key}` : key;
             localStorage.setItem(localKey, JSON.stringify(data));
         } catch (e) { console.error("Erro localStorage:", e); }
 
-        // 2. Se estiver logado, salva na nuvem também
+        // 2. Salva Nuvem (Se logado)
         if (this.userId) {
-            try {
-                // Cria uma referência ao documento do usuário: coleção 'users', documento 'ID_DO_USUARIO'
-                const userRef = doc(db, "users", this.userId);
-                
-                // Salva o dado dentro de um objeto. Ex: { gym_rats_templates: [...] }
-                // O { merge: true } garante que não apague outros dados do usuário
-                await setDoc(userRef, { [key]: data }, { merge: true });
-                console.log(`Dados '${key}' sincronizados na nuvem.`);
-            } catch (e) {
-                console.error("Erro Firestore Save:", e);
+            const db = this.getDb();
+            if (db) {
+                try {
+                    const userRef = doc(db, "users", this.userId);
+                    await setDoc(userRef, { [key]: data }, { merge: true });
+                } catch (e) {
+                    console.error("Erro ao salvar na nuvem:", e);
+                }
             }
         }
     }
 
-    // Método Genérico para Ler (Tenta Nuvem primeiro, depois Local)
-    static async get(key) {
-        // 1. Tenta pegar do LocalStorage primeiro para ser instantâneo (cache)
+    // --- Ler (Tenta Local, Sync carrega da nuvem separado) ---
+    static get(key) {
         let localData = null;
         try {
             const localKey = this.userId ? `user_${this.userId}_${key}` : key;
             const str = localStorage.getItem(localKey);
             if (str) localData = JSON.parse(str);
         } catch (e) { console.error(e); }
-
         return localData;
     }
 
-    // [NOVO] Método explícito para baixar da nuvem (usado ao fazer login)
+    // --- Sincronizar (Chamado no Login) ---
     static async syncFromCloud() {
         if (!this.userId) return;
+        
+        const db = this.getDb();
+        if (!db) return;
 
         try {
             const userRef = doc(db, "users", this.userId);
@@ -65,22 +70,18 @@ export class StorageService {
 
             if (docSnap.exists()) {
                 const cloudData = docSnap.data();
-                
-                // Atualiza o LocalStorage com o que veio da nuvem
-                // As chaves principais do nosso app:
                 const keys = ['gym_rats_templates', 'gym_rats_history', 'gym_rats_full_logs'];
                 
                 keys.forEach(k => {
                     if (cloudData[k]) {
-                        const localKey = `user_${this.userId}_${k}`;
-                        localStorage.setItem(localKey, JSON.stringify(cloudData[k]));
+                        localStorage.setItem(`user_${this.userId}_${k}`, JSON.stringify(cloudData[k]));
                     }
                 });
-                console.log("Sincronização da nuvem concluída.");
-                return true; // Indica que houve sync
+                console.log("Sincronização concluída.");
+                return true;
             }
         } catch (e) {
-            console.error("Erro ao baixar da nuvem:", e);
+            console.error("Erro no Sync:", e);
         }
         return false;
     }
