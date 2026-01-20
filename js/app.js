@@ -28,22 +28,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const recordsView = new RecordsView();
     let dashboardView = null; // Inicializado após Auth
 
-    // --- 4. Autenticação & Usuário ---
-    AuthService.onStateChanged((user) => {
+    // --- 4. Lógica de Autenticação ---
+
+    // Escuta mudanças de estado (Login/Logout)
+    AuthService.onStateChanged(async (user) => { // Note o ASYNC aqui
         currentUser = user;
+
         if (user) {
+            // USUÁRIO LOGADO
             const initial = user.email ? user.email[0].toUpperCase() : 'U';
             profileIconText.innerText = initial;
             btnProfile.style.borderColor = 'var(--color-primary)';
+
+            // 1. Configura ID
             StorageService.setUserId(user.uid);
+
+            // 2. [NOVO] Baixa dados da nuvem
+            // Mostra um aviso visual simples (opcional) ou apenas log
+            console.log("Buscando dados na nuvem...");
+            await StorageService.syncFromCloud(); 
+            
         } else {
+            // USUÁRIO DESLOGADO
             profileIconText.innerText = 'Log In';
             btnProfile.style.borderColor = 'var(--color-border)';
             profileIconText.style.fontSize = '0.6rem';
+
             StorageService.setUserId(null);
         }
-        // Recarrega o Dashboard para atualizar calendário com dados do usuário correto
+
+        // 3. Recarrega o Dashboard (agora com dados atualizados da nuvem)
         dashboardView = new DashboardView();
+        
+        // Se estiver na tela de Histórico ou Criar Treino, recarregar elas também seria ideal
+        // mas o Dashboard é o principal.
     });
 
     // Eventos de Login
