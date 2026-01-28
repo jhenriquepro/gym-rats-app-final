@@ -11,161 +11,193 @@
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💪</text></svg>">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Saira+Stencil+One&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/desktop/desktop.css">
 </head>
 
 <body>
 
+    <div id="desktop-wrapper" style="display: none;">
+
+        <nav class="desk-nav">
+            <div class="desk-logo">YOUR GYM STATS</div>
+            <div class="desk-links">
+                <a onclick="location.reload()">Início</a>
+                <a>Sobre</a>
+                <a>Download</a>
+                <a id="desk-btn-login">Sign In/Log In</a>
+            </div>
+        </nav>
+
+        <div class="desk-main-grid">
+
+            <aside class="desk-col-left" id="desk-col-left">
+            </aside>
+
+            <main class="desk-col-right" id="desk-col-right">
+            </main>
+
+        </div>
+    </div>
+
     <header class="app-header" id="main-header">
-        <h1>GYM RATS - 30 DIAS</h1>
-        <button type="button" id="btn-user-profile" aria-label="Perfil do Usuário">
-            <span class="icon">User</span>
-        </button>
-    </header>
 
-    <main id="app-root">
+        <header class="app-header" id="main-header">
+            <h1>GYM RATS - 30 DIAS</h1>
+            <button type="button" id="btn-user-profile" aria-label="Perfil do Usuário">
+                <span class="icon">User</span>
+            </button>
+        </header>
 
-        <section id="view-dashboard" class="view-section active">
-            <header class="view-header">
-                <h2>Dashboard</h2>
-            </header>
+        <main id="app-root">
 
-            <div id="dashboard-stats-container" class="dashboard-calendar-area"></div>
+            <section id="view-dashboard" class="view-section active">
+                <header class="view-header">
+                    <h2>Dashboard</h2>
+                </header>
 
-            <div class="action-area">
-                <button id="btn-start-selection" class="btn-primary">
-                    ▶ INICIAR TREINO
-                </button>
-                <button id="btn-create-template" class="btn-secondary" data-target="view-create-workout">
-                    + CRIAR NOVO TREINO
-                </button>
-                <button id="btn-view-records" class="btn-secondary" data-target="view-records"
-                    style="border-color: var(--color-text-muted);">
-                    📅 REGISTROS & HISTÓRICO
-                </button>
-            </div>
-        </section>
+                <div id="dashboard-stats-container" class="dashboard-calendar-area"></div>
 
-        <section id="view-create-workout" class="view-section hidden">
-            <header class="view-header">
-                <h2>Novo Plano</h2>
-            </header>
-
-            <form id="form-create-workout">
-                <div class="form-group">
-                    <label for="inp-plan-name">NOME DO TREINO</label>
-                    <input type="text" id="inp-plan-name" placeholder="Ex: Treino A - Peito" autocomplete="off"
-                        maxlength="25" required>
+                <div class="action-area">
+                    <button id="btn-start-selection" class="btn-primary">
+                        ▶ INICIAR TREINO
+                    </button>
+                    <button id="btn-create-template" class="btn-secondary" data-target="view-create-workout">
+                        + CRIAR NOVO TREINO
+                    </button>
+                    <button id="btn-view-records" class="btn-secondary" data-target="view-records"
+                        style="border-color: var(--color-text-muted);">
+                        📅 REGISTROS & HISTÓRICO
+                    </button>
                 </div>
+            </section>
 
-                <div class="add-exercise-box">
-                    <label>ADICIONAR EXERCÍCIO</label>
-                    <input type="text" id="inp-new-exercise" placeholder="Digite o nome (Ex: Supino Reto)"
-                        maxlength="50">
+            <section id="view-create-workout" class="view-section hidden">
+                <header class="view-header">
+                    <h2>Novo Plano</h2>
+                </header>
 
-                    <div class="add-row">
-                        <input type="number" id="inp-new-sets" placeholder="Séries" min="1" max="10"
-                            inputmode="numeric">
-                        <button type="button" id="btn-append-exercise" class="btn-secondary">
-                            + Incluir na Lista
-                        </button>
+                <form id="form-create-workout">
+                    <div class="form-group">
+                        <label for="inp-plan-name">NOME DO TREINO</label>
+                        <input type="text" id="inp-plan-name" placeholder="Ex: Treino A - Peito" autocomplete="off"
+                            maxlength="25" required>
                     </div>
-                </div>
 
-                <ul id="preview-list"></ul>
+                    <div class="add-exercise-box">
+                        <label>ADICIONAR EXERCÍCIO</label>
+                        <input type="text" id="inp-new-exercise" placeholder="Digite o nome (Ex: Supino Reto)"
+                            maxlength="50">
 
-                <div class="form-actions">
-                    <button type="submit" class="btn-success">SALVAR TREINO</button>
-                    <button type="button" id="btn-cancel-create" class="btn-text">Cancelar</button>
-                </div>
-            </form>
-        </section>
-
-        <section id="view-log-workout" class="view-section hidden">
-            <header class="view-header">
-                <h2 id="log-title">Treino Atual</h2>
-            </header>
-
-            <form id="form-log-workout">
-                <div id="sets-container"></div>
-
-                <div class="form-actions">
-                    <button type="submit" class="btn-success">FINALIZAR TREINO</button>
-                    <button type="button" id="btn-cancel-log" class="btn-text">Cancelar Treino</button>
-                </div>
-            </form>
-        </section>
-
-        <section id="view-records" class="view-section hidden">
-            <header class="view-header">
-                <button class="btn-icon" id="btn-back-records" aria-label="Voltar">‹</button>
-                <h2>Histórico</h2>
-            </header>
-
-            <div class="records-container">
-                <div class="filters-box">
-                    <label>PERÍODO</label>
-                    <div class="date-inputs-row">
-                        <input type="date" id="inp-date-start" class="inp-date">
-                        <input type="date" id="inp-date-end" class="inp-date">
+                        <div class="add-row">
+                            <input type="number" id="inp-new-sets" placeholder="Séries" min="1" max="10"
+                                inputmode="numeric">
+                            <button type="button" id="btn-append-exercise" class="btn-secondary">
+                                + Incluir na Lista
+                            </button>
+                        </div>
                     </div>
-                    <button id="btn-search-records" class="btn-primary">BUSCAR REGISTROS</button>
-                </div>
 
-                <div id="records-results-list">
-                    <p class="text-muted text-center" style="margin-top: 20px;">Selecione uma data para buscar.</p>
-                </div>
-            </div>
-        </section>
+                    <ul id="preview-list"></ul>
 
-        <dialog id="app-modal" class="modal">
-            <div class="modal-content">
-                <p id="modal-message"></p>
-                <button id="btn-close-modal">Fechar</button>
-            </div>
-        </dialog>
-
-        <dialog id="modal-select-workout" class="modal">
-            <div class="modal-content">
-                <h3>Escolha o Treino</h3>
-                <div id="list-saved-workouts" class="workout-list-container">
-                    <p class="text-muted text-center">Nenhum treino salvo.</p>
-                </div>
-                <button id="btn-close-selection" class="btn-text full-width">Fechar</button>
-            </div>
-        </dialog>
-
-        <dialog id="modal-login" class="modal">
-            <div class="modal-content login-content">
-                <h3>BEM-VINDO</h3>
-                <p>Faça login para salvar seu progresso na nuvem.</p>
-
-                <form id="form-login">
-                    <input type="email" id="inp-email" placeholder="E-mail" required>
-                    <input type="password" id="inp-password" placeholder="Senha" required>
-
-                    <button type="submit" class="btn-primary">ENTRAR / REGISTRAR</button>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-success">SALVAR TREINO</button>
+                        <button type="button" id="btn-cancel-create" class="btn-text">Cancelar</button>
+                    </div>
                 </form>
+            </section>
 
-                <div class="divider">ou</div>
+            <section id="view-log-workout" class="view-section hidden">
+                <header class="view-header">
+                    <h2 id="log-title">Treino Atual</h2>
+                </header>
 
-                <button type="button" id="btn-google-login" class="btn-google">
-                    <span>G</span> Continuar com Google
-                </button>
+                <form id="form-log-workout">
+                    <div id="sets-container"></div>
 
-                <button id="btn-close-login" class="btn-text">Cancelar</button>
-            </div>
-        </dialog>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-success">FINALIZAR TREINO</button>
+                        <button type="button" id="btn-cancel-log" class="btn-text">Cancelar Treino</button>
+                    </div>
+                </form>
+            </section>
 
-    </main>
+            <section id="view-records" class="view-section hidden">
+                <header class="view-header">
+                    <button class="btn-icon" id="btn-back-records" aria-label="Voltar">‹</button>
+                    <h2>Histórico</h2>
+                </header>
 
-    <nav class="bottom-nav" id="main-navbar">
-        <ul class="nav-list">
-            <li><a href="#" class="nav-item active" data-target="view-dashboard">Início</a></li>
-        </ul>
-    </nav>
+                <div class="records-container">
+                    <div class="filters-box">
+                        <label>PERÍODO</label>
+                        <div class="date-inputs-row">
+                            <input type="date" id="inp-date-start" class="inp-date">
+                            <input type="date" id="inp-date-end" class="inp-date">
+                        </div>
+                        <button id="btn-search-records" class="btn-primary">BUSCAR REGISTROS</button>
+                    </div>
 
-    <script type="module" src="./js/app.js"></script>
+                    <div id="records-results-list">
+                        <p class="text-muted text-center" style="margin-top: 20px;">Selecione uma data para buscar.</p>
+                    </div>
+                </div>
+            </section>
+
+            <dialog id="app-modal" class="modal">
+                <div class="modal-content">
+                    <p id="modal-message"></p>
+                    <button id="btn-close-modal">Fechar</button>
+                </div>
+            </dialog>
+
+            <dialog id="modal-select-workout" class="modal">
+                <div class="modal-content">
+                    <h3>Escolha o Treino</h3>
+                    <div id="list-saved-workouts" class="workout-list-container">
+                        <p class="text-muted text-center">Nenhum treino salvo.</p>
+                    </div>
+                    <button id="btn-close-selection" class="btn-text full-width">Fechar</button>
+                </div>
+            </dialog>
+
+            <dialog id="modal-login" class="modal">
+                <div class="modal-content login-content">
+                    <h3>BEM-VINDO</h3>
+                    <p>Faça login para salvar seu progresso na nuvem.</p>
+
+                    <form id="form-login">
+                        <input type="email" id="inp-email" placeholder="E-mail" required>
+                        <input type="password" id="inp-password" placeholder="Senha" required>
+
+                        <button type="submit" class="btn-primary">ENTRAR / REGISTRAR</button>
+                    </form>
+
+                    <div class="divider">ou</div>
+
+                    <button type="button" id="btn-google-login" class="btn-google">
+                        <span>G</span> Continuar com Google
+                    </button>
+
+                    <button id="btn-close-login" class="btn-text">Cancelar</button>
+                </div>
+            </dialog>
+
+        </main>
+
+        <nav class="bottom-nav" id="main-navbar">
+            <ul class="nav-list">
+                <li><a href="#" class="nav-item active" data-target="view-dashboard">Início</a></li>
+            </ul>
+        </nav>
+
+        <script type="module" src="./js/app.js"></script>
 </body>
 
 </html>

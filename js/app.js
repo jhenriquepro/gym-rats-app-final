@@ -1,3 +1,4 @@
+import { DesktopView } from './views/DesktopView.js';
 import { LogWorkoutView } from './views/LogWorkoutView.js';
 import { CreateWorkoutView } from './views/CreateWorkoutView.js';
 import { DashboardView } from './views/DashboardView.js';
@@ -6,6 +7,11 @@ import { AuthService } from './services/AuthService.js';
 import { StorageService } from './services/StorageService.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    if (window.innerWidth >= 1024) {
+        console.log("Iniciando Modo Desktop...");
+        new DesktopView();
+    }
 
     // --- 1. Referências Globais ---
     const btnProfile = document.getElementById('btn-user-profile');
